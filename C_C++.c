@@ -5,27 +5,29 @@
 typedef struct Person{
 	char name;
 	int age;
-	void (*EatFunction)(struct Person this, int num);
+	void (*Print)(struct Person this);
 }Person; 
  
 //定义函数功能 
-void EatFunction(struct Person this, int num){
-	printf("Test\n");
+void Print(struct Person this)
+{
+	printf("name:%c\n",this.name);
+	printf("age:%d\n",this.age);
 } 
  
 //定义“类 ”的构造函数
 //与面向对象不同，C语言的“类”的 构造函数不能放在“类”中，只能放在“类”外
 //构造函数主要完成 变量的初始化，以及函数指针的赋值 
-Person *NewPerson(Person *this){
+NewPerson(Person *this){
 	this->name = 'A';
 	this->age = 18;
-	this->EatFunction = EatFunction;
+	this->Print = Print;
 } 
  
 //主函数调用 
 int main(){
 	Person person;
 	NewPerson(&person);
-	person.EatFunction(person,0);
+	person.Print(person);
 	return 0;
 } 
